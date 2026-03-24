@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lumève — Book a Session</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F9F7F4; font-family: 'Helvetica Neue', sans-serif; color: #2C2820; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+  .wrap { max-width: 560px; width: 100%; }
+  .logo { font-family: Georgia, serif; font-size: 28px; letter-spacing: 6px; color: #2C2820; text-align: center; margin-bottom: 6px; }
+  .tagline { font-size: 11px; letter-spacing: 3px; color: #C8B89A; text-align: center; margin-bottom: 8px; }
+  .divider { width: 40px; height: 1px; background: #C8B89A; margin: 0 auto 32px; }
+  .card { background: #fff; border: 0.5px solid #E4DDD4; border-radius: 12px; padding: 32px; }
+  .section-lbl { font-size: 10px; letter-spacing: 2px; color: #C8A87A; display: block; margin-bottom: 16px; }
+  .f { margin-bottom: 18px; }
+  .f label { font-size: 10px; letter-spacing: 2px; color: #9A8E80; display: block; margin-bottom: 7px; }
+  .f input, .f select, .f textarea { width: 100%; border: 0.5px solid #C8B89A; padding: 10px 13px; background: #FDFCFB; font-size: 13px; color: #2C2820; font-family: 'Helvetica Neue', sans-serif; border-radius: 0; outline: none; }
+  .f input:focus, .f select:focus, .f textarea:focus { border-color: #2C2820; }
+  .f textarea { resize: none; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .sep { border: none; border-top: 0.5px solid #E4DDD4; margin: 24px 0; }
+  .btn { width: 100%; background: #2C2820; color: #F4EFE8; padding: 14px; font-size: 11px; letter-spacing: 3px; border: none; cursor: pointer; font-family: 'Helvetica Neue', sans-serif; margin-top: 10px; }
+  .btn:hover { background: #3C3428; }
+  .btn:disabled { background: #C8B89A; cursor: not-allowed; }
+  .note { font-size: 11px; color: #9A8E80; text-align: center; margin-top: 14px; line-height: 1.7; }
+  .success { text-align: center; padding: 40px 20px; display: none; }
+  .success-mark { width: 52px; height: 52px; border: 1px solid #C8B89A; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 22px; color: #C8B89A; font-family: Georgia, serif; }
+  .success h2 { font-family: Georgia, serif; font-size: 22px; color: #2C2820; margin-bottom: 10px; font-weight: 400; }
+  .success p { font-size: 13px; color: #9A8E80; line-height: 1.8; }
+  .success small { display: block; font-size: 11px; color: #C8B89A; margin-top: 20px; letter-spacing: 1px; }
+  .err { font-size: 11px; color: #c0392b; margin-top: 8px; display: none; text-align: center; }
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(244,239,232,0.4); border-top-color: #F4EFE8; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">LUMÈVE</div>
+  <div class="tagline">BOOK YOUR SESSION</div>
+  <div class="divider"></div>
+
+  <div class="card" id="form-card">
+    <span class="section-lbl">YOUR DETAILS</span>
+    <div class="row2">
+      <div class="f"><label>FIRST NAME *</label><input id="fname" placeholder="Sara" /></div>
+      <div class="f"><label>LAST NAME *</label><input id="lname" placeholder="Al Mansoori" /></div>
+    </div>
+    <div class="row2">
+      <div class="f"><label>EMAIL *</label><input id="email" type="email" placeholder="your@email.com" /></div>
+      <div class="f"><label>WHATSAPP *</label><input id="phone" placeholder="+971 50 000 0000" /></div>
+    </div>
+    <hr class="sep" />
+    <span class="section-lbl">SESSION DETAILS</span>
+    <div class="f">
+      <label>SESSION TYPE *</label>
+      <select id="stype">
+        <option value="">Select a session...</option>
+        <option>Pre-wedding / Couples</option>
+        <option>Lifestyle / Personal Brand</option>
+        <option>Baby Milestone / Birthday</option>
+        <option>Full Family Experience</option>
+      </select>
+    </div>
+    <div class="f">
+      <label>PACKAGE *</label>
+      <select id="package">
+        <option value="">Select a package...</option>
+        <option value="The Spark — AED 1200">The Spark — AED 1,200 (Couples · 1.5 hrs)</option>
+        <option value="The Bloom — AED 950">The Bloom — AED 950 (Baby · 1 hr)</option>
+        <option value="The Frame — AED 1500">The Frame — AED 1,500 (Lifestyle · 2 hrs)</option>
+        <option value="The Chapter — AED 2200">The Chapter — AED 2,200 (Family · 3 hrs)</option>
+      </select>
+    </div>
+    <div class="row2">
+      <div class="f"><label>PREFERRED DATE</label><input id="pdate" type="date" /></div>
+      <div class="f">
+        <label>PREFERRED TIME</label>
+        <select id="ptime">
+          <option>Golden hour — sunrise ~6am</option>
+          <option>Morning ~9am</option>
+          <option>Golden hour — sunset ~5pm</option>
+          <option>Flexible</option>
+        </select>
+      </div>
+    </div>
+    <div class="f">
+      <label>PREFERRED LOCATION</label>
+      <select id="ploc">
+        <option>Suggest a location for me</option>
+        <option>Downtown Dubai / Burj Khalifa area</option>
+        <option>Al Qudra / Desert</option>
+        <option>Dubai Creek / Heritage area</option>
+        <option>Jumeirah Beach / Waterfront</option>
+        <option>Home / indoor session</option>
+        <option>Other (see notes)</option>
+      </select>
+    </div>
+    <hr class="sep" />
+    <span class="section-lbl">ANYTHING ELSE?</span>
+    <div class="f">
+      <label>YOUR VISION / NOTES</label>
+      <textarea id="vision" rows="4" placeholder="Mood, references, special requests..."></textarea>
+    </div>
+    <div class="f">
+      <label>HOW DID YOU FIND US?</label>
+      <select id="source">
+        <option>Instagram</option>
+        <option>Google</option>
+        <option>Referral</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="err" id="err-msg">Please fill in all required fields (*).</div>
+    <button class="btn" id="submit-btn" onclick="submitBooking()">SUBMIT ENQUIRY</button>
+    <p class="note">We respond within 24 hours via email or WhatsApp.<br>A 50% deposit confirms your date.</p>
+  </div>
+
+  <div class="card success" id="success-card">
+    <div class="success-mark">✦</div>
+    <h2>Thank you.</h2>
+    <p>Your enquiry has been received.<br>We'll be in touch within 24 hours.</p>
+    <small>— LUMÈVE</small>
+  </div>
+</div>
+
+<script>
+  // ↓ STEP 1: Paste your Make.com webhook URL here
+  const WEBHOOK_URL = "YOUR_MAKE_WEBHOOK_URL";
+
+  const fees = { "The Spark — AED 1200": 1200, "The Bloom — AED 950": 950, "The Frame — AED 1500": 1500, "The Chapter — AED 2200": 2200 };
+
+  async function submitBooking() {
+    const fname = document.getElementById('fname').value.trim();
+    const lname = document.getElementById('lname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const stype = document.getElementById('stype').value;
+    const pkg   = document.getElementById('package').value;
+    const err   = document.getElementById('err-msg');
+
+    if (!fname || !lname || !email || !phone || !stype || !pkg) { err.style.display = 'block'; return; }
+    err.style.display = 'none';
+
+    if (WEBHOOK_URL === "YOUR_MAKE_WEBHOOK_URL") { alert("Please set up the Make.com webhook first — see the setup instructions."); return; }
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Sending...';
+
+    const payload = {
+      client_name:    fname + " " + lname,
+      email,
+      whatsapp:       phone,
+      session_type:   stype,
+      package:        pkg,
+      total_fee:      fees[pkg] || 0,
+      preferred_date: document.getElementById('pdate').value || "",
+      preferred_time: document.getElementById('ptime').value,
+      location:       document.getElementById('ploc').value,
+      vision:         document.getElementById('vision').value.trim() || "No notes provided",
+      source:         document.getElementById('source').value,
+      status:         "New Inquiry"
+    };
+
+    try {
+      await fetch(WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), mode: "no-cors" });
+      document.getElementById('form-card').style.display = 'none';
+      document.getElementById('success-card').style.display = 'block';
+    } catch(e) {
+      btn.disabled = false;
+      btn.innerHTML = 'SUBMIT ENQUIRY';
+      err.textContent = 'Something went wrong. Please try again.';
+      err.style.display = 'block';
+    }
+  }
+</script>
+</body>
+</html>
